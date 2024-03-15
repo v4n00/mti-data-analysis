@@ -82,22 +82,36 @@ This analysis is used more for understanding the data more than dimensionality r
 
 ![PCA factor loadings](/dataOUT/PCA/factor_loadings.png)
 
-The factor loadings plot shows the relationship between the variables and the principal components. The interpretation for the main components is as follows:
+The factor loadings plot shows the relationship between the variables and the principal components. **The following results that follow are my own interpretations and should not be taken at face value**:
 
-1. **Component 1** - this component explains a notable correlation between `sex` and `psych`, probably presenting the fact that **thyroid diseases manifest differently on the two genders** and that they can also **affect the mental health** of the patient.
+1. **Component 1** - this component explains a notable correlation between `sex` and `psych`, probably presenting the fact that **thyroid diseases manifest differently on the two genders** and that they can also **affect the mental health** of the patient;
 
-2. **Component 2** - this component shows a strong correlation between `thyroxine`, `query_hypothyroid` and `pregnant`. Pregnancy increases the demand for thyroid hormones, and it can also lead to hypothyroidism, while thyroxine is a hormone that is used to treat hypothyroidism. In a nutshell, if a woman has **insufficient thyroxine production before becoming pregnant**, or if her body cannot increase thyroxine production adequately during pregnancy, **she may develop hypothyroidism**.
+2. **Component 2** - this component shows a strong correlation between `thyroxine`, `query_hypothyroid` and `pregnant`. Pregnancy increases the demand for thyroid hormones, and it can also lead to hypothyroidism, while thyroxine is a hormone that is used to treat hypothyroidism. In a nutshell, if a woman has **insufficient thyroxine production before becoming pregnant**, or if her body cannot increase thyroxine production adequately during pregnancy, **she may develop hypothyroidism**;
 
-3. **Component 3** - this component shows an easily interpretable conclusion, the correlation between `on_antithyroid_meds` and `query_hyperthyroid` makes sense, since **antithyroid medications are used to treat hyperthyroidism**. The correlation between goitre and tumor is weirdly logical, since **goitre can be mistaken for thyroid cancer**.
+3. **Component 3** - this component shows an easily interpretable conclusion, the correlation between `on_antithyroid_meds` and `query_hyperthyroid` makes sense, since **antithyroid medications are used to treat hyperthyroidism**. The correlation between goitre and tumor is weirdly logical, since **goitre can be mistaken for thyroid cancer**;
 
-4. **Component 4** - this component shows a correlation between `psych` and `lithium`, which is totally accurate since **lithium is used to treat psychiatric problems like bipolar disorder**.
+4. **Component 4** - this component shows a correlation between `psych` and `lithium`, which is totally accurate since **lithium is used to treat psychiatric problems like bipolar disorder**. This components links up with the next component;
 
-5. **Component 5** - this component shows a weird correlation between `goitre` and `lithium`, which can suggest that **lithium can affect thyroid function** and thus cause abnomarlities in the thyroid gland.
+5. **Component 5** - this component shows a weird correlation between `goitre` and `lithium`, which can suggest that **lithium can affect thyroid function** and thus cause abnomarlities in the thyroid gland. This is also backed by a study that can be found [here](https://www.uptodate.com/contents/lithium-and-the-thyroid);
 
-6. **Component 6** - this component is not really linked with anything, showing only a strong correlation with only `thyroid_surgery`, which makes sense for patients that have thyroid problems.
+6. **Component 6** - this component is not really linked with anything, showing only a strong correlation with only `thyroid_surgery`, which makes sense for patients that have thyroid problems;
 
-7. **Component 7** - this component is very interesting, since it shows a very strong correlation with age, indicating that there might be some underlying **age-related thyroid problems**.
+7. **Component 7** - this component is very interesting, since it shows a very strong correlation with `age`, indicating that there might be some underlying **age-related thyroid problems**.
 
 ### Hierarchical Clustering Analysis
+
+This analysis is used to cluster the data into groups based on the age of the patients, starting from $10$ all the way to $64$.
+
+![HCA dendrogram](/dataOUT/HCA/hierarchical_classification.png)
+
+The dendogram shows the clustering of the ages, and it is clear that there are **three main clusters that represent different stages in life**:
+
+1. **Cluster 1 / Puberty** (ages $11$ - $15$) - this cluster indicates the prevalence of thyroid problems that occur during puberty, which is a understandable due to the **hormonal changes that happen during this developmental period**;
+
+2. **Cluster 2 / Adulthood** (ages $22$ - $40$) - this cluster indicates the prevalence of thyroid problems that occur during the childbearing years for women, which is also another common occurrence due to the **hormonal changes that happen during pregnancy**;
+
+3. **Cluster 3 / Middle age** (ages $40$ - $60$) - this cluster indicates the prevalence of thyroid problems that occur during middle age, which is a common occurrence due to the **hormonal changes that happen during this period, especially for women**. This cluster can be further broken down into 2 more clusters, showing ages below 50 and above 50.
+
+An **interesting outlier** is the age of $21$, which is situated between the first and second cluster, and can be interpreted as a **transition period** between puberty and adulthood.
 
 ## Conclusions
