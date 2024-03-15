@@ -100,9 +100,9 @@ The factor loadings plot shows the relationship between the variables and the pr
 
 ### Hierarchical Clustering Analysis
 
-This analysis is used to cluster the data into groups based on the age of the patients, starting from $10$ all the way to $64$.
+This analysis is used to cluster the data into groups based on the age of the patients, starting from $10$ all the way up to $64$.
 
-![HCA dendrogram](/dataOUT/HCA/hierarchical_classification.png)
+![HCA dendogram](/dataOUT/HCA/hierarchical_classification.png)
 
 The dendogram shows the clustering of the ages, and it is clear that there are **three main clusters that represent different stages in life**:
 

@@ -13,6 +13,8 @@ def dendrogram(h, labels, title='Hierarchical Classification', threshold=None):
     hic.dendrogram(h, labels=labels, leaf_rotation=30)
     if threshold:
         plt.axhline(threshold, c='r')
+    plt.xlabel('Age', fontsize=14, color='k', verticalalignment='top')
+    plt.ylabel('Distance', fontsize=14, color='k', verticalalignment='bottom')
 
 def threshold(h):
     m = np.shape(h)[0]
@@ -40,7 +42,7 @@ startIdx = 10
 endIdx = 64
 
 table = pd.read_csv('dataIN/thyroid_dataset_hca.csv', index_col=0, na_values='')
-obsName = table.index[startIdx:endIdx]
+obsName = [int(i) for i in table.index[startIdx:endIdx]]
 X = table.iloc[startIdx:endIdx, :].values
 
 methods = list(hic._LINKAGE_METHODS)
