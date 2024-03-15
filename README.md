@@ -94,7 +94,7 @@ The factor loadings plot shows the relationship between the variables and the pr
 
 5. **Component 5** - this component shows a weird correlation between `goitre` and `lithium`, which can suggest that **lithium can affect thyroid function** and thus cause abnomarlities in the thyroid gland. This is also backed by a study that can be found [here](https://www.uptodate.com/contents/lithium-and-the-thyroid);
 
-6. **Component 6** - this component is not really linked with anything, showing only a strong correlation with only `thyroid_surgery`, which makes sense for patients that have thyroid problems;
+6. **Component 6** - this component is not really linked with anything, showing only a strong correlation with only `thyroid_surgery`, which makes sense for patients that already have thyroid problems;
 
 7. **Component 7** - this component is very interesting, since it shows a very strong correlation with `age`, indicating that there might be some underlying **age-related thyroid problems**.
 
@@ -104,7 +104,7 @@ This analysis is used to cluster the data into groups based on the age of the pa
 
 ![HCA dendogram](/dataOUT/HCA/hierarchical_classification.png)
 
-The dendogram shows the clustering of the ages, and it is clear that there are **three main clusters that represent different stages in life**:
+The dendogram shows the clustering of the ages, and it is clear that there are **three main clusters that represent different stages in life**. The red line represents the **optimal number of clusters**, that being 3. The clusters are as follows:
 
 1. **Cluster 1 / Puberty** (ages $11$ - $15$) - this cluster indicates the prevalence of thyroid problems that occur during puberty, which is a understandable due to the **hormonal changes that happen during this developmental period**;
 
@@ -115,3 +115,7 @@ The dendogram shows the clustering of the ages, and it is clear that there are *
 An **interesting outlier** is the age of $21$, which is situated between the first and second cluster, and can be interpreted as a **transition period** between puberty and adulthood.
 
 ## Conclusions
+
+The analysis of this dataset has shown that there are **several factors that can influence the development of thyroid diseases**, like gender, psychiatric problems or medications and that they can also be linked with the **different stages of life**.
+
+As people go through life, from being young to getting older, the risk and type of thyroid problems can change, and it is important to be aware of these changes and to take necessary precautions.
