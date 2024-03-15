@@ -25,48 +25,78 @@ The data itself was donated by the [Garvan Institute of Medical Research](https:
 
 ### Description of the variables
 
-The dataset contains **9172 observations** and 31 variables, but only 12 were used for analysis.
+The dataset contains **9172 observations** and **31 variables**, but **only 14 variables** were used for analysis.
 
 They are (in order):
 
-1. age - age of the patient (int)
-2. sex - sex patient identifies (str)
-3. on_thyroxine - whether patient is on thyroxine (bool)
-4. on antithyroid meds - whether patient is on antithyroid meds (bool)
-5. pregnant - whether patient is pregnant (bool)
-6. thyroid_surgery - whether patient has undergone thyroid surgery (bool)
-7. I131_treatment - whether patient is undergoing I131 treatment (bool)
-8. query_hypothyroid - whether patient has hypothyroid (bool)
-9. query_hyperthyroid - whether patient has hyperthyroid (bool)
-10. lithium - whether patient takes lithium (bool)
-11. goitre - whether patient has goitre (bool)
-12. tumor - whether patient has tumor (bool)
+1. age - age of the patient *(int)*
+2. sex - sex patient identifies *(str)*
+3. on_thyroxine - whether patient is on thyroxine *(bool)*
+4. on antithyroid meds - whether patient is on antithyroid meds *(bool)*
+5. sick - whether patient is sick *(bool)*
+6. pregnant - whether patient is pregnant *(bool)*
+7. thyroid_surgery - whether patient has undergone thyroid surgery *(bool)*
+8. I131_treatment - whether patient is undergoing I131 treatment *(bool)*
+9. query_hypothyroid - whether patient has hypothyroid *(bool)*
+10. query_hyperthyroid - whether patient has hyperthyroid *(bool)*
+11. lithium - whether patient takes lithium *(bool)*
+12. goitre - whether patient had goitre *(bool)*
+13. tumor - whether patient had a tumor *(bool)*
+14. psych - whether patient psychiatric problems *(bool)*
 
 ## Analysis Information
 
 ### Technical specifications
 
-The analysis was done using Python, and the main libraries used were `pandas`, `numpy` and `matplotlib`.
+- The analysis was done using Python, and the main libraries used were `pandas`, `numpy` and `matplotlib`.
 
-The code is split into two py files that corespond to the two main analysis methods use, namely `mainPCA.py` and `mainHCA.py`. These two files, aside from running the algorithms, also contain a reference to another two python scripts that clean the data and prepare it for analysis, namely `/util/datasetPCA.py` and `/util/datasetPCA.py`.
+- The code is split into two py files that corespond to the two main analysis methods use, namely `mainPCA.py` and `mainHCA.py`. These two files, aside from running the algorithms, also contain a reference to another two python scripts that clean the data and prepare it for analysis, namely `/util/datasetPCA.py` and `/util/datasetPCA.py`.
 
-The raw dataset file can be found in `/dataIN/thyroid_dataset_raw.csv`.
+- The raw dataset file can be found in `/dataIN/thyroid_dataset_raw.csv`.
 
 ### Analysis methods
 
-The analysis was done using two main methods, namely **Principal Component Analysis (PCA)** and **Hierarchical Clustering Analysis (HCA)**.
+- The analysis was done using two main methods, namely **Principal Component Analysis (PCA)** and **Hierarchical Clustering Analysis (HCA)**.
 
-I have chosen these two methods because they are both **unsupervised learning methods**, and they are both used for **dimensionality reduction** and **data visualization** respectively.
+- I have chosen these two methods because they are both **unsupervised learning methods**, and they are both used for **dimensionality reduction** and **data visualization** respectively.
 
 ### Data cleaning
 
-For both analysis methods, I turned the **boolean variables** into `0` and `1` along with the identifiers for *Male* and *Female*. Then, I replaced the missing values by taking a mean of the respective observation and following it up by standardising the data.
+- For both analysis methods, I turned the **boolean variables** into `0` and `1` along with the identifiers for *Male* and *Female*. Then, I replaced the missing values by taking a mean of the respective observation and following it up by standardising the data.
 
-The only missing values that weren't replaced were the gender, for which I have decided it would be best to drop since there was no way of estimating a value for them. For the hierarchical clustering analysis, the variables were also grouped by age.
+- The only missing values that weren't replaced were the gender, for which I have decided it would be best to drop since there was no way of estimating a value for them. For the hierarchical clustering analysis, the variables were also grouped by age.
 
 ## Results
 
 ### Principal Component Analysis
+
+This analysis is used more for understanding the data more than dimensionality reduction, and it is used to find the most important features of the dataset.
+
+![PCA scree plot of variations](/dataOUT/PCA/principal_components.png)
+
+- The scree plot illustrates the variance explained by the principal components, and it shows that the **first seven components are the most important**. As the scree plot progresses from `C1` to `C7`, the variance explained by each component decreases.
+
+- Although this pattern continues, we can observe an interesting case, where the *sixth component* (`C6`) is **slightly above** the red horizontal line of 1.0 (which represents **Kaiser’s criterion**, signaling which components to keep) and the *seventh component* (`C7`) is also on the same level.
+
+- This weird case sparked the interest for a second analysis to investigate what is happening with the data, especially for the the *seventh component* (`C7`).
+
+![PCA factor loadings](/dataOUT/PCA/factor_loadings.png)
+
+The factor loadings plot shows the relationship between the variables and the principal components. The interpretation for the main components is as follows:
+
+1. **Component 1** - this component explains a notable correlation between `sex` and `psych`, probably presenting the fact that **thyroid diseases manifest differently on the two genders** and that they can also **affect the mental health** of the patient.
+
+2. **Component 2** - this component shows a strong correlation between `thyroxine`, `query_hypothyroid` and `pregnant`. Pregnancy increases the demand for thyroid hormones, and it can also lead to hypothyroidism, while thyroxine is a hormone that is used to treat hypothyroidism. In a nutshell, if a woman has **insufficient thyroxine production before becoming pregnant**, or if her body cannot increase thyroxine production adequately during pregnancy, **she may develop hypothyroidism**.
+
+3. **Component 3** - this component shows an easily interpretable conclusion, the correlation between `on_antithyroid_meds` and `query_hyperthyroid` makes sense, since **antithyroid medications are used to treat hyperthyroidism**. The correlation between goitre and tumor is weirdly logical, since **goitre can be mistaken for thyroid cancer**.
+
+4. **Component 4** - this component shows a correlation between `psych` and `lithium`, which is totally accurate since **lithium is used to treat psychiatric problems like bipolar disorder**.
+
+5. **Component 5** - this component shows a weird correlation between `goitre` and `lithium`, which can suggest that **lithium can affect thyroid function** and thus cause abnomarlities in the thyroid gland.
+
+6. **Component 6** - this component is not really linked with anything, showing only a strong correlation with only `thyroid_surgery`, which makes sense for patients that have thyroid problems.
+
+7. **Component 7** - this component is very interesting, since it shows a very strong correlation with age, indicating that there might be some underlying **age-related thyroid problems**.
 
 ### Hierarchical Clustering Analysis
 
