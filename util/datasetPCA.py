@@ -24,7 +24,7 @@ def replaceNAN(X):
 cols = thyroid_df.columns.values
 th = replaceNAN(thyroid_df.values)
 thyroid_df = pd.DataFrame(data=th, columns=cols)
-thyroid_df.drop(['query_on_thyroxine', 'query_hypothyroid'], inplace=True, axis=1)
+thyroid_df.drop(['query_on_thyroxine', 'hypopituitary'], inplace=True, axis=1)
 
 scaler = StandardScaler()
 thyroid_df[thyroid_df.columns] = scaler.fit_transform(thyroid_df)
